@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retail &amp; E-commerce Profit Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-mark">₹</span>
+        <span class="brand-text">Profit<br />Analyzer</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item active" href="#">
+          <span class="nav-dot"></span> Dashboard
+        </a>
+        <a class="nav-item" href="#charts">
+          <span class="nav-dot"></span> Charts
+        </a>
+        <a class="nav-item" href="#products">
+          <span class="nav-dot"></span> Products
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Sample / Demo data</p>
+        <p class="muted">Retail &amp; E-commerce Profit Analyzer</p>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <header class="topbar">
+        <div>
+          <h1>Retail &amp; E-commerce Profit Analyzer</h1>
+          <p class="subtitle" id="dataSourceSubtitle">Overview of sales, profit and performance &mdash; using sample demo data</p>
+        </div>
+      </header>
+
+      <!-- CSV import -->
+      <section class="card import-card" aria-label="Import data">
+        <div class="import-row">
+          <div>
+            <h2>Import Your Data</h2>
+            <p class="import-hint">
+              Upload a CSV with columns <strong>Date, Product, Category, Quantity, Sales</strong>,
+              plus <strong>Cost</strong> and/or <strong>Profit</strong>.
+            </p>
+          </div>
+          <div class="import-actions">
+            <label class="btn-upload" for="csvFileInput">Choose CSV File</label>
+            <input type="file" id="csvFileInput" accept=".csv,text/csv" hidden />
+            <button id="useSampleDataBtn" class="btn-reset" type="button">Use Sample Data</button>
+          </div>
+        </div>
+        <p id="importStatus" class="import-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters" aria-label="Filters">
+        <div class="filter-group">
+          <label for="monthFilter">Month</label>
+          <select id="monthFilter">
+            <option value="all">All months</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter">
+            <option value="all">All categories</option>
+          </select>
+        </div>
+
+        <button id="resetFilters" class="btn-reset" type="button">Reset Filters</button>
+      </section>
+
+      <!-- KPI cards -->
+      <section class="kpi-grid" aria-label="Key performance indicators">
+        <div class="kpi-card">
+          <span class="kpi-label">Total Sales</span>
+          <span class="kpi-value" id="kpiSales">₹0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Total Profit</span>
+          <span class="kpi-value" id="kpiProfit">₹0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Total Orders</span>
+          <span class="kpi-value" id="kpiOrders">0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Profit Margin</span>
+          <span class="kpi-value" id="kpiMargin">0%</span>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="charts-grid" id="charts" aria-label="Charts">
+        <div class="card chart-card">
+          <h2>Monthly Sales &amp; Profit</h2>
+          <div class="chart-wrap">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <h2>Sales by Category</h2>
+          <div class="chart-wrap">
+            <canvas id="doughnutChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product table -->
+      <section class="card table-card" id="products" aria-label="Top selling products">
+        <h2>Top Selling Products</h2>
+        <div class="table-wrap">
+          <table id="productTable">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Units Sold</th>
+                <th>Sales</th>
+                <th>Profit</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody">
+              <!-- rows injected by script.js -->
+            </tbody>
+          </table>
+          <div id="emptyState" class="empty-state" hidden>
+            <p>No data matches the selected filters.</p>
+            <button id="emptyStateReset" class="btn-reset" type="button">Reset Filters</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-note">
+        <p>Figures are generated from the active dataset &mdash; the sample/demo data in <code>data.js</code> by default, or the CSV file you import above.</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
